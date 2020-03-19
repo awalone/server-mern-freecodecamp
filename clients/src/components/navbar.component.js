@@ -18,6 +18,15 @@ export default class Navbar extends Component {
                         <li className="navbar-item">
                             <Link className="nav-link" to="/user">Create User</Link>
                         </li>
+                        <li className="navbar-item">
+                            <Link className="nav-link" to="/addpegawai">Create Pegawai</Link>
+                        </li>
+                        <li className="navbar-item">
+                            <Link className="nav-link" to="/pegawai">Daftar Pegawai</Link>
+                        </li>
+                        <li className="navbar-item">
+                            <Link className="nav-link" to="/unitkerja">Daftar Unit Kerja</Link>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -11,16 +11,17 @@ router.route('/add').post((req, res) => {
     const nama          = req.body.nama;
     const nip           = req.body.nip;
     const jabatan       = req.body.jabatan;
-    const unit_kerja    = req.body.unit_kerja;
+    const unitKerja     = req.body.unitKerja;
     const keterangan    = req.body.keterangan;
-
     const newPegawai = new Pegawai({
         nama,
         nip,
         jabatan,
-        unit_kerja,
-        keterangan
+        unitKerja,
+        keterangan,
     });
+
+    console.log(nama);
 
     newPegawai.save()
         .then(() => res.json('Pegawai Sudah Ditambahkan'))
@@ -37,15 +38,10 @@ router.route('/update/:id').post((req, res) => {
     Pegawai.findById(req.params.id)
         .then(pegawai => {
             pegawai.nama        = req.body.nama;
-            pegawai.nip         = req.body.nip;
-            pegawai.jabatan     = req.body.jabatan;
-            pegawai.unit_kerja  = req.body.unit_kerja;
-            pegawai.keterangan  = req.body.keterangan;
 
             pegawai.save()
             .then(() => res.json('Pegawai Telah Diubah'))
             .catch(err => res.status(400).json('Error : ' + err));
-
         })
         .catch( err => res.status(400).json('Error : ' + err));
 });

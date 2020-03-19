@@ -1,27 +1,26 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-export default class CreatePegawai extends Component {
+export default class PegawaiCreate extends Component {
+
     constructor(props) {
         super(props);
-
-        this.onChangeNama = this.onChangeNama.bind(this);
-        this.onChangeNip  = this.onChangeNip.bind(this);
+        this.onChangeNamaPegawai = this.onChangeNamaPegawai.bind(this);
+        this.onChangeNip = this.onChangeNip.bind(this);
         this.onChangeJabatan = this.onChangeJabatan.bind(this);
         this.onChangeUnitKerja = this.onChangeUnitKerja.bind(this);
+        // this.onChangeUnitKerja = this.onChangeUnitKerja.bind(this);
         this.onChangeKeterangan = this.onChangeKeterangan.bind(this);
-
-      
-
+        this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             nama: '',
             nip: '',
             jabatan: '',
-            unit_kerja: '',
+            unitKerja: '',
             keterangan: ''
         }
     }
 
-    onChangeNama(e) {
+    onChangeNamaPegawai(e) {
         this.setState({
             nama: e.target.value
         });
@@ -41,9 +40,15 @@ export default class CreatePegawai extends Component {
 
     onChangeUnitKerja(e) {
         this.setState({
-            unit_kerja: e.target.value
+            unitKerja: e.target.value
         });
     }
+
+    // onChangeUnitKerja(e) {
+    //     this.setState({
+    //         unitKerja: e.target.unitKerja
+    //     });
+    // }
 
     onChangeKeterangan(e) {
         this.setState({
@@ -53,51 +58,39 @@ export default class CreatePegawai extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        // const pegawai = {
-        //     nama: this.state.nama,
-        //     nip: this.state.nip,
-        //     jabatan: this.state.jabatan,
-        //     unit_kerja: this.state.unit_kerja,
-        //     keterangan: this.state.keterangan
-        // }
-
-        e.preventDefault();
         const pegawai = {
-            nama: '',
+            nama: this.state.nama,
             nip: this.state.nip,
             jabatan: this.state.jabatan,
-            unit_kerja: this.state.unit_kerja,
+            unitKerja: this.state.unitKerja,
             keterangan: this.state.keterangan
-        }
-
-
+        };
         console.log(pegawai);
-        // axios.post('http://localhost:5000/pegawai/add', pegawai)
-        //     .then(res => console.log(res.data));
-        // window.location = '/';
+        axios.post('http://localhost:5000/pegawai/add', pegawai)
+            .then(res => console.log(res.data));
+
+        window.location = '/pegawai';
     }
 
     render() {
         return (
             <div>
-                <h3>Tambah Pegawai</h3>
-                <form onSubmit={this.onSubmit}>
+                <h3>Create New Pegawai</h3>
+                <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
-                        <label htmlFor="Nama">Nama Pegawai</label>
-                        <input type="text" 
+                        <label>Nama Pegawai</label>
+                        <input type="text"
                             className="form-control"
                             value={this.state.nama}
-                            onChange={this.onChangeNama}
-                            />
+                            onChange={this.onChangeNamaPegawai} />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="Nip">Nip</label>
                         <input type="text" 
-                            className="form-control"
-                            value={this.state.nip}
-                            onChange={this.onChangeNip}
-                            />
+                                className="form-control"
+                                value={this.state.nip}
+                                onChange={this.onChangeNip}/>
                     </div>
 
                     <div className="form-group">
@@ -105,17 +98,15 @@ export default class CreatePegawai extends Component {
                         <input type="text" 
                             className="form-control"
                             value={this.state.jabatan}
-                            onChange={this.onChangeJabatan}
-                            />
+                            onChange={this.onChangeJabatan}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="UnitKerja">Unit Kerja</label>
+                        <label htmlFor="Jabatan">Unit Kerja</label>
                         <input type="text" 
                             className="form-control"
-                            value={this.state.unit_kerja}
-                            onChange={this.onChangeUnitKerja}
-                            />
+                            value={this.state.unitKerja}
+                            onChange={this.onChangeUnitKerja}/>
                     </div>
 
                     <div className="form-group">
@@ -123,13 +114,13 @@ export default class CreatePegawai extends Component {
                         <input type="text" 
                             className="form-control"
                             value={this.state.keterangan}
-                            onChange={this.onChangeKeterangan}
-                            />
+                            onChange={this.onChangeKeterangan} />
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Input Pegawai" className="btn btn-primary" />
+                        <input type="submit" value="Create Pegawai" className="btn btn-primary" />
                     </div>
+
                 </form>
             </div>
         )

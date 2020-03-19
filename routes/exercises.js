@@ -33,7 +33,7 @@ router.route('/:id').get((req, res) => {
 });
 
 
-router.route('/update/:id').post((req, ers) => {
+router.route('/update/:id').post((req, res) => {
     Exercise.findById(req.params.id)
         .then(exercise => {
             exercise.username = req.body.username;
